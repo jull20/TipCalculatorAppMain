@@ -1,0 +1,157 @@
+@font-face {
+    font-family: "Space Mono";
+    src: url(../assets/font/SpaceMono-Bold.ttf);
+}
+
+$white:     #FFFFFF;
+$black:     #000000;
+$grey-50:   #F3F9FA;
+$grey-200:  #C5E4E7;
+$grey-300:  #9EBBBD;
+$grey-400:  #7F9D9F;
+$grey-500:  #5E7A7D;
+$grey-550:  #547878;
+$grey-600:  #3D6666;
+$green-200: #9FE8DF;
+$green-400: #26C2AE;
+$green-750: #0D686D;
+$green-800: #085C61;
+$green-900: #00474B;
+$orange:    #E17052;
+
+@mixin text-preset-1{
+    font-family: "Space Mono";
+    font-size:      4.8rem;
+    line-height:    7.1rem;
+    letter-spacing: -.1rem;
+}
+@mixin text-preset-2{
+    font-family: "Space Mono";
+    font-size:      3.2rem;
+    line-height:    3.6rem;
+    letter-spacing: 0;
+}
+@mixin text-preset-3{
+    font-family: "Space Mono";
+    font-size:      2.4rem;
+    line-height:    3.6rem;
+    letter-spacing: 0;
+}
+@mixin text-preset-4{
+    font-family: "Space Mono";
+    font-size:      2rem;
+    line-height:    3rem;
+    letter-spacing: 0;
+}
+@mixin text-preset-5{
+    font-family: "Space Mono";
+    font-size:      1.6rem;
+    line-height:    2.4rem;
+    letter-spacing: 0;
+}
+@mixin text-preset-6{
+    font-family: "Space Mono";
+    font-size:      1.3rem;
+    line-height:    1.9rem;
+    letter-spacing: 0;
+}
+
+@mixin flex($direction, $main-axis, $cross-axis){
+    display:         flex;
+    flex-direction:  $direction;
+    justify-content: $main-axis;
+    align-items:     $cross-axis;
+}
+
+label{
+    @include text-preset-5;
+    color: $grey-500;
+}
+.num-input{
+    border: none;
+    border-radius: .5rem;
+    direction: rtl;
+    @include text-preset-3;
+    color: $green-900;
+    &.bill-amount{
+        background: $grey-50 url("../assets/images/icon-dollar.svg") no-repeat 1.85rem;
+    }
+    &.people-count{
+        background: $grey-50 url("../assets/images/icon-person.svg") no-repeat 1.85rem;
+    }
+    &:focus,
+    &:focus-visible{
+        outline: 2px solid $green-400;
+    }
+    &::placeholder{
+        color: $grey-300;
+    }
+    &.error{
+        outline: 2px solid $orange;
+    }
+}
+.people{
+    position: relative;
+}
+.people-error{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $orange;
+    @include text-preset-5;
+}
+.content__results-container{
+    border-radius: 1.5rem;
+    background-color: $green-900;
+}
+.result-name{
+    @include text-preset-5;
+    color: $white;
+}
+.result-descr{
+    @include text-preset-6;
+    color: $grey-400;
+}
+.result-sum{
+    @include text-preset-1;
+    color: $green-400;
+    @media screen and (max-width: 450px) {
+        @include text-preset-2;
+    }
+}
+
+.btn{
+    width: 100%;
+    height: 4.8rem;
+    border: none;
+    border-radius: .5rem;
+    &.percent-btn{
+        background-color: $green-900;
+        padding: .8rem 1.6rem;
+        color: $white;
+        @include text-preset-3;
+        &.active{
+            color: $green-900;    
+            background-color: $green-400;
+        }
+    }
+    &.custom-btn{ 
+        background-color: $grey-50;
+        color: $grey-550;
+        @include text-preset-3;
+    }
+    &.reset-btn{
+        background-color: $green-400;
+        color: $green-900;
+        @include text-preset-4;
+        text-transform: uppercase;
+    }
+    &:not(.custom-btn):not(&[disabled = "disabled"]):hover{
+        color: $green-900;    
+        background-color: $green-200;
+    }
+    &:disabled{
+        color: $green-800;    
+        background-color: $green-750;
+    }
+}
