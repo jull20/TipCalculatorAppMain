@@ -19,26 +19,49 @@
         <div class="content">
           <div class="content__bill-container">
             <form class="form">
-              <div class="bill">
-                <label for="bill-amount">Bill</label>
-                <input class="bill-amount num-input" id="bill-amount" type="number" placeholder="0">
+
+              <div class="bill-container">
+                <label for="bill">Bill</label>
+                <input class="bill-amount num-input" name="bill" id="bill" type="number" step="0.01" placeholder="0">
               </div>
-              <div class="percent-type">
-                <label for="percent-btn-container">Select Tip %</label>
-                <div class="percent-btn-container" id="percent-btn-container">
-                  <button type="button" class="btn percent-btn">5%</button>
-                  <button type="button" class="btn percent-btn">10%</button>
-                  <button type="button" class="btn percent-btn">15%</button>
-                  <button type="button" class="btn percent-btn">25%</button>
-                  <button type="button" class="btn percent-btn">50%</button>
-                  <button type="button" class="btn custom-btn">Custom</button>
+
+              <div class="percent-container">
+                <label for="percent">Select Tip %</label>
+                <div class="percent-btn-container">
+                  <label class="radio">
+                    <input required value="5%" name="percent" id="percent" class="btn radio-input" type="radio">
+                    <span  class="radio-label">5%</span>
+                  </label>
+                  <label class="radio">
+                    <input required value="10%" name="percent" id="percent" class="btn radio-input" type="radio">
+                    <span  class="radio-label">10%</span>
+                  </label>
+                  <label class="radio">
+                    <input required value="15%" name="percent" id="percent" class="btn radio-input" type="radio">
+                    <span  class="radio-label">15%</span>
+                  </label>
+                  <label class="radio">
+                    <input required value="25%" name="percent" id="percent" class="btn radio-input" type="radio">
+                    <span  class="radio-label">25%</span>
+                  </label>
+                  <label class="radio">
+                    <input required value="50%" name="percent" id="percent" class="btn radio-input" type="radio">
+                    <span  class="radio-label">50%</span>
+                  </label>
+                  <label class="radio" id="custom">
+                    <input required value="" name="percent" id="percent" class="btn radio-input custom-btn" type="radio">
+                    <span  class="radio-label ">Custom</span>
+                    <input class="num-input hidden" type="number" step="1"  placeholder="0">
+                  </label>
                 </div>
               </div>
-              <div class="people">
-                <label for="people-num">Number of People</label>
-                <input class="people-count num-input" type="number" id="people-num" placeholder="0">
-                <span class="people-error hidden">Can’t be zero</span>
+
+              <div class="people-container">
+                <label for="people">Number of People</label>
+                <input class="people-count num-input" type="number" step="1" name="people" id="people" placeholder="0">
+                <span class="people-error hidden"></span>
               </div>
+
             </form>
           </div>
 

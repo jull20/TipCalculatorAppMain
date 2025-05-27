@@ -19,12 +19,20 @@ label {
   line-height: 3.6rem;
   letter-spacing: 0;
   color: #00474B;
+  background-repeat: no-repeat;
+  background-position: 1.85rem;
+  background-color: #F3F9FA;
+}
+#custom .num-input {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .num-input.bill-amount {
-  background: #F3F9FA url("../assets/images/icon-dollar.svg") no-repeat 1.85rem;
+  background-image: url("../assets/images/icon-dollar.svg");
 }
 .num-input.people-count {
-  background: #F3F9FA url("../assets/images/icon-person.svg") no-repeat 1.85rem;
+  background-image: url("../assets/images/icon-person.svg");
 }
 .num-input:focus, .num-input:focus-visible {
   outline: 2px solid #26C2AE;
@@ -36,7 +44,7 @@ label {
   outline: 2px solid #E17052;
 }
 
-.people {
+.people-container {
   position: relative;
 }
 
@@ -94,18 +102,12 @@ label {
   border: none;
   border-radius: 0.5rem;
 }
-.btn.percent-btn {
+.btn.radio-input {
+  appearance: none;
+  position: relative;
   background-color: #00474B;
   padding: 0.8rem 1.6rem;
   color: #FFFFFF;
-  font-family: "Space Mono";
-  font-size: 2.4rem;
-  line-height: 3.6rem;
-  letter-spacing: 0;
-}
-.btn.percent-btn.active {
-  color: #00474B;
-  background-color: #26C2AE;
 }
 .btn.custom-btn {
   background-color: #F3F9FA;
@@ -114,6 +116,9 @@ label {
   font-size: 2.4rem;
   line-height: 3.6rem;
   letter-spacing: 0;
+}
+.btn.custom-btn + .radio-label {
+  color: #547878;
 }
 .btn.reset-btn {
   background-color: #26C2AE;
@@ -124,13 +129,55 @@ label {
   letter-spacing: 0;
   text-transform: uppercase;
 }
-.btn:not(.custom-btn):not(.btn[disabled=disabled]):hover {
-  color: #00474B;
-  background-color: #9FE8DF;
+@media screen and (min-width: 1024px) {
+  .btn:not(.custom-btn):not(.btn[disabled=disabled]):hover {
+    color: #00474B;
+    background-color: #9FE8DF;
+  }
+  .btn:not(.custom-btn):not(.btn[disabled=disabled]):hover + .radio-label {
+    color: #00474B;
+  }
 }
 .btn:disabled {
   color: #085C61;
   background-color: #0D686D;
+}
+
+.radio {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio-label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #FFFFFF;
+  font-family: "Space Mono";
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  letter-spacing: 0;
+}
+
+.radio-input:checked {
+  background-color: #26C2AE;
+}
+.radio-input:checked + .radio-label {
+  color: #00474B;
+}
+
+#custom {
+  position: relative;
 }
 
 * {
@@ -255,9 +302,9 @@ body {
   }
 }
 
-.bill,
-.people,
-.percent-type {
+.bill-container,
+.people-container,
+.percent-container {
   width: 100%;
   display: flex;
   flex-direction: column;

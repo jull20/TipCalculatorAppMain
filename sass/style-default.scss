@@ -73,11 +73,19 @@ label{
     direction: rtl;
     @include text-preset-3;
     color: $green-900;
+    background-repeat: no-repeat;
+    background-position: 1.85rem;
+    background-color: $grey-50;
+    #custom &{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     &.bill-amount{
-        background: $grey-50 url("../assets/images/icon-dollar.svg") no-repeat 1.85rem;
+        background-image: url("../assets/images/icon-dollar.svg");
     }
     &.people-count{
-        background: $grey-50 url("../assets/images/icon-person.svg") no-repeat 1.85rem;
+        background-image: url("../assets/images/icon-person.svg");
     }
     &:focus,
     &:focus-visible{
@@ -90,7 +98,7 @@ label{
         outline: 2px solid $orange;
     }
 }
-.people{
+.people-container{
     position: relative;
 }
 .people-error{
@@ -125,20 +133,21 @@ label{
     height: 4.8rem;
     border: none;
     border-radius: .5rem;
-    &.percent-btn{
+
+    &.radio-input{
+        appearance: none;
+        position: relative;
         background-color: $green-900;
         padding: .8rem 1.6rem;
         color: $white;
-        @include text-preset-3;
-        &.active{
-            color: $green-900;    
-            background-color: $green-400;
-        }
     }
     &.custom-btn{ 
         background-color: $grey-50;
         color: $grey-550;
         @include text-preset-3;
+        & + .radio-label{
+            color: $grey-550;
+        }
     }
     &.reset-btn{
         background-color: $green-400;
@@ -146,12 +155,49 @@ label{
         @include text-preset-4;
         text-transform: uppercase;
     }
-    &:not(.custom-btn):not(&[disabled = "disabled"]):hover{
-        color: $green-900;    
-        background-color: $green-200;
+    @media screen and (min-width: 1024px) {
+        &:not(.custom-btn):not(&[disabled = "disabled"]):hover{
+            color: $green-900;    
+            background-color: $green-200;
+            & + .radio-label{
+                color: $green-900;
+            }
+        }
     }
     &:disabled{
         color: $green-800;    
         background-color: $green-750;
     }
 }
+
+.radio{
+  position: relative;
+  width: 100%;
+  @include flex(row, center, center);
+}
+
+.radio-label{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    @include flex(row, center, center);
+    width: 100%;
+    height: 100%;
+    color: $white;
+    @include text-preset-3;
+
+}
+
+.radio-input:checked{
+    background-color: $green-400;
+    & + .radio-label{
+        color: $green-900;
+    }
+}
+
+
+#custom{
+    position: relative;
+}
+
+ 

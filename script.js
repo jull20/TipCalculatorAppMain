@@ -1,19 +1,83 @@
-let typeTips_btns = document.querySelectorAll(".percent-btn");
-let addActiveState = (e) => {
-    if(document.querySelector(".active")) document.querySelector(".active").classList.remove("active");
-    e.target.classList.add("active");
-}
-typeTips_btns.forEach(btn => {btn.addEventListener("click", addActiveState)})
-
-let form = document.querySelector(".form");
+let reset_btn = document.querySelector(".reset-btn");
 let people_input = document.querySelector(".people-count");
-people_input.addEventListener("input", function(){
-    if(this.value == "0") {
-        this.classList.add("error");
-        document.querySelector(".people-error").classList.remove("hidden");
+let form = document.querySelector(".form");
+let custom_btn = document.querySelector(".custom-btn");
+let radio_btn = document.querySelectorAll(".radio-input");
+let prev = null;
+
+let handleReset = (e) => {
+    document.querySelectorAll(".num-input").forEach(input => input.value="");
+    document.querySelector(".radio-input:checked").checked = false;
+    document.querySelectorAll(".result-sum span").forEach(span => span.textContent="0.00");
+    e.target.setAttribute("disabled", "disabled");
+}
+let handleHidden = (e) => {
+    let custom_input = document.querySelector("#custom .num-input");
+    let custom_label = document.querySelector("#custom .radio-label");
+    if(e.target == custom_btn){
+        custom_input.classList.remove("hidden");
+        custom_label.classList.add("hidden");
+    }
+    if(prev == custom_btn){
+            custom_input.value = "";
+            custom_input.classList.add("hidden");
+            custom_label.classList.remove("hidden");
+
+    }
+    if (e.target !== prev) {
+        prev = e.target;
+    }
+
+}
+let handleErrorInput = (e) => {
+    if(e.target.value[0] == "0"){
+        // e.target.setAttribute("maxlength", "1");
+        let error = document.querySelector(".people-error"); 
+        e.target.classList.add("error");
+        error.classList.remove("hidden");
+        error.textContent = "Can’t be zero";
     }
     else{
-        this.classList.remove("error");
+        e.target.classList.remove("error");
         document.querySelector(".people-error").classList.add("hidden");
     }
-})
+}
+
+let handleChange = (e) => {
+    let bill_amount = document.querySelector(".bill-amount")
+    let people_count = document.querySelector(".people-count")
+    let percent_btn = document.querySelector(".radio-input:checked");
+
+    if(percent_btn == document.querySelector(".custom-btn")){
+        percent_btn.value = document.querySelector("#custom .num-input").value;
+    }
+    if(bill_amount.value && people_count.value != "" && percent_btn.validity.valueMissing == false && percent_btn.value != ""){
+        console.log("bill = " + bill_amount.value + "\npercent = " + percent_btn.value + "\npeople = " + people_count.value)  
+        form.requestSubmit();
+    }
+}
+let handleSubmit = (e) => {
+    e.preventDefault();
+    const form_data = new FormData(e.target);
+    const data = Object.fromEntries(form_data);
+    console.log(data)
+    let tip_amount, total_amount;
+    [tip_amount, total_amount] = calculateResult(parseFloat(data.bill), parseInt(data.percent), parseInt(data.people));
+    console.log(`${tip_amount} ${total_amount}`)
+    document.querySelector(".tips-sum span").textContent  = tip_amount == Infinity ? '0.00': tip_amount;
+    document.querySelector(".total-sum span").textContent = total_amount == Infinity ? '0.00': total_amount;
+    document.querySelector(".reset-btn").removeAttribute("disabled");
+}
+let calculateResult = (bill, percent, people_num) => {
+    let tip_amount = parseFloat((bill / people_num * percent / 100).toFixed(2));
+    let total_amount= (bill / people_num + tip_amount).toFixed(2);
+    return [tip_amount, total_amount];
+}
+
+reset_btn.addEventListener('click', handleReset);
+people_input.addEventListener("input", handleErrorInput);
+form.addEventListener("submit", handleSubmit);
+form.addEventListener("input", handleChange);
+
+
+radio_btn.forEach(inp => inp.addEventListener("change", handleHidden))
