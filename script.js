@@ -16,22 +16,20 @@ let handleHidden = (e) => {
     let custom_label = document.querySelector("#custom .radio-label");
     if(e.target == custom_btn){
         custom_input.classList.remove("hidden");
+        custom_input.focus();
         custom_label.classList.add("hidden");
     }
     if(prev == custom_btn){
             custom_input.value = "";
             custom_input.classList.add("hidden");
             custom_label.classList.remove("hidden");
-
     }
     if (e.target !== prev) {
         prev = e.target;
     }
-
 }
-let handleErrorInput = (e) => {
+let handleInputError = (e) => {
     if(e.target.value[0] == "0"){
-        // e.target.setAttribute("maxlength", "1");
         let error = document.querySelector(".people-error"); 
         e.target.classList.add("error");
         error.classList.remove("hidden");
@@ -42,7 +40,26 @@ let handleErrorInput = (e) => {
         document.querySelector(".people-error").classList.add("hidden");
     }
 }
-
+let peopleValidation = (el) => {
+    if(el.value[0] == "0"){
+        document.querySelectorAll(".result-sum span").forEach(span => span.textContent="0.00");
+        return false;
+    }
+    else if(el.value == "") {
+        document.querySelectorAll(".result-sum span").forEach(span => span.textContent="0.00");
+        return false;
+    }
+    return true
+}
+let percentValidation = (el) => {
+    if(el.validity.valueMissing == false){
+        if(el.value != "") {
+            console.log(el.value)
+            return true;
+        }
+    }
+    return false;
+}
 let handleChange = (e) => {
     let bill_amount = document.querySelector(".bill-amount")
     let people_count = document.querySelector(".people-count")
@@ -51,8 +68,8 @@ let handleChange = (e) => {
     if(percent_btn == document.querySelector(".custom-btn")){
         percent_btn.value = document.querySelector("#custom .num-input").value;
     }
-    if(bill_amount.value && people_count.value != "" && percent_btn.validity.valueMissing == false && percent_btn.value != ""){
-        console.log("bill = " + bill_amount.value + "\npercent = " + percent_btn.value + "\npeople = " + people_count.value)  
+
+    if(bill_amount.value != "" && peopleValidation(people_count) == true && percentValidation(percent_btn) == true){
         form.requestSubmit();
     }
 }
@@ -75,9 +92,7 @@ let calculateResult = (bill, percent, people_num) => {
 }
 
 reset_btn.addEventListener('click', handleReset);
-people_input.addEventListener("input", handleErrorInput);
+people_input.addEventListener('input', handleInputError);
+radio_btn.forEach(inp => inp.addEventListener("change", handleHidden))
 form.addEventListener("submit", handleSubmit);
 form.addEventListener("input", handleChange);
-
-
-radio_btn.forEach(inp => inp.addEventListener("change", handleHidden))

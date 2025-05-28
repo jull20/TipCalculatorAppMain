@@ -23,10 +23,17 @@ label {
   background-position: 1.85rem;
   background-color: #F3F9FA;
 }
+.num-input::-webkit-outer-spin-button, .num-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0;
+}
 #custom .num-input {
   position: absolute;
   top: 0;
   left: 0;
+  text-align: center;
+  padding: 0;
 }
 .num-input.bill-amount {
   background-image: url("../assets/images/icon-dollar.svg");
@@ -210,7 +217,17 @@ body {
 }
 @media screen and (min-width: 1024px) {
   .page-container {
-    padding-top: 16.3rem;
+    padding-top: clamp(0rem, 16vh, 30rem);
+    gap: 8.8rem 0;
+  }
+}
+@media screen and (min-height: 1025px) and (max-width: 1023px) {
+  .page-container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -239,13 +256,13 @@ body {
 @media screen and (min-width: 450px) and (max-width: 1024px) {
   .main__container {
     width: clamp(439px, 79.17vw, 900px);
-    padding: 4.8rem 8rem;
+    padding: 4.8rem clamp(4rem, 5vw, 8rem);
   }
 }
 @media screen and (min-width: 1024px) {
   .main__container {
     width: clamp(810px, 63.89vw, 1500px);
-    padding: 3.2rem;
+    padding: 3.2rem 4rem;
   }
 }
 
@@ -267,7 +284,19 @@ body {
 }
 @media screen and (min-width: 1024px) {
   .content {
-    gap: 0 4.8rem;
+    gap: 4.8rem 4.8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 1024px) and (orientation: portrait) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 }
 
@@ -277,6 +306,22 @@ body {
 @media screen and (max-width: 450px) {
   .content__bill-container {
     width: 95.2%;
+  }
+}
+
+.content__results-container {
+  width: 100%;
+  min-height: 25.7rem;
+  max-height: 42rem;
+  padding: 4.2rem 4.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 450px) {
+  .content__results-container {
+    padding: 2.4rem;
   }
 }
 
@@ -331,16 +376,6 @@ body {
   }
 }
 
-.content__results-container {
-  width: 100%;
-  padding: 4.2rem 4.7rem;
-}
-@media screen and (max-width: 450px) {
-  .content__results-container {
-    padding: 2.4rem;
-  }
-}
-
 .result-content {
   width: 100%;
   display: flex;
@@ -361,6 +396,11 @@ body {
 @media screen and (min-width: 1024px) {
   .result-content {
     gap: 12.8rem 0;
+  }
+}
+@media screen and (min-width: 1024px) and (orientation: portrait) {
+  .result-content {
+    gap: 6rem 0;
   }
 }
 

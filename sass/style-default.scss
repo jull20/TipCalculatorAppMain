@@ -76,10 +76,18 @@ label{
     background-repeat: no-repeat;
     background-position: 1.85rem;
     background-color: $grey-50;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        margin: 0;
+    }
     #custom &{
         position: absolute;
         top: 0;
         left: 0;
+        text-align: center;
+        padding: 0;
     }
     &.bill-amount{
         background-image: url("../assets/images/icon-dollar.svg");
@@ -187,15 +195,12 @@ label{
     @include text-preset-3;
 
 }
-
 .radio-input:checked{
     background-color: $green-400;
     & + .radio-label{
         color: $green-900;
     }
 }
-
-
 #custom{
     position: relative;
 }

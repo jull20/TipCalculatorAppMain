@@ -20,10 +20,14 @@ body{
     min-height: 100%;
     @include flex(column, flex-start, center);
     gap: 4.1rem 0;
-    // gap: clamp() 0;
     padding-top: 5rem;
     @media screen and (min-width: 1024px) {
-        padding-top: 16.3rem;
+        padding-top: clamp(0rem, 16vh, 30rem);
+        gap: 8.8rem 0;
+    }
+    @media screen and (min-height: 1025px) and (max-width: 1023px) {
+        padding: 0;
+        @include flex(column, center, center);
     }
 }
 .main{
@@ -43,13 +47,11 @@ body{
     }
     @media screen and (min-width: 450px) and (max-width: 1024px){
         width: clamp(439px, 79.17vw, 900px);
-        // height: 100%;
-        padding: 4.8rem 8rem;
+        padding: 4.8rem clamp(4rem, 5vw, 8rem);
     }
     @media screen and (min-width: 1024px) {
         width: clamp(810px, 63.89vw, 1500px);
-        // height: 100%;
-        padding: 3.2rem;
+        padding: 3.2rem 4rem;
     }
 }
 .content{
@@ -61,7 +63,11 @@ body{
         gap: 4rem 0;
     }
     @media screen and (min-width: 1024px) {
-        gap: 0 4.8rem;
+        @media screen and (orientation: portrait) {
+            @include flex(column, flex-start, center);
+        }
+        gap: 4.8rem 4.8rem;
+        @include flex(row, flex-start, center);
     }
 }
 .content__bill-container{
@@ -69,6 +75,16 @@ body{
     @media screen and (max-width: 450px) {
         width: 95.2%;
     }
+}
+.content__results-container{
+    width: 100%;
+    min-height: 25.7rem;
+    max-height: 42rem;
+    padding: 4.2rem 4.7rem;
+    @include flex(row, center, center);
+    @media screen and (max-width: 450px) {
+        padding: 2.4rem;
+    }   
 }
 .form{
     @include flex(column, flex-start, flex-start);
@@ -103,13 +119,6 @@ body{
         grid-template-columns: repeat(2, 1fr);
     }
 }
-.content__results-container{
-    width: 100%;
-    padding: 4.2rem 4.7rem;
-    @media screen and (max-width: 450px) {
-        padding: 2.4rem;
-    }   
-}
 .result-content{
     width: 100%;
     @include flex(column, flex-start, flex-start);
@@ -120,6 +129,9 @@ body{
         gap: 1.6rem 0;
     }
     @media screen and (min-width: 1024px) {
+        @media screen and (orientation: portrait) {
+            gap: 6rem 0;
+        }
         gap: 12.8rem 0;
     }
 }
@@ -135,9 +147,10 @@ body{
 .total{
     width: 100%;
     @include flex(row, space-between, center);
-
 }
 .hidden{
     display: none;
 }
+
+
 
